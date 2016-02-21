@@ -26,10 +26,10 @@ monotonic_avg.on('emit', function(values) {
     if (values['mean'] != 0) {
       if (values['mean'] < lo_temp ) {
         console.log("turn ON heating! " + values['mean'] + ' <= ' + lo_temp);
-        turnOnHeating();
+        //TODO turnOnHeating();
       } else if (values['mean'] > hi_temp) {
         console.log("turn OFF heating! " + values['mean'] + ' > ' + hi_temp);
-        turnOffHeating();
+        //TODO turnOffHeating();
       } else {
         console.log('Do nothing! ' + lo_temp + ' <= ' + values['mean'] + ' <= ' + hi_temp);
       }
