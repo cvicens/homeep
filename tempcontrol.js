@@ -10,6 +10,9 @@ var heatingTimeout = null;
 var Heating = require('./lib/heating');
 var heating = new Heating();
 
+var LCD = require('./lib/lcd');
+var lcd = new LCD();
+
 var DEFAULT_TIMER = 1; // TODO REVIEW!!!!
 
 var BASE_LINE_TEMP = 20;
@@ -24,6 +27,7 @@ monotonic_avg.on('emit', function(values) {
   if (values['mean'] != 0) {
     console.log("AVG (all) => " + JSON.stringify(values));
     if (values['mean'] != 0) {
+      lcd.printAvgTemperature(values['mean']);
       if (values['mean'] < lo_temp ) {
         console.log("turn ON heating! " + values['mean'] + ' <= ' + lo_temp);
         //TODO turnOnHeating();
