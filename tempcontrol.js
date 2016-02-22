@@ -157,7 +157,7 @@ app.get('/heating/status', function (req, res) {
   var resp = null, desc = null;
   var status = heating.status();
   resp = 'ACK';
-  desc = 'Heating ' + (status == 1 ? 'ON' : 'OFF');
+  desc = 'Heating ' + (status == 1 ? 'OFF' : 'ON');
 
   res.send({ status: status, resp: resp, desc: desc });
 });
