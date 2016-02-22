@@ -81,11 +81,12 @@ function turnOnHeating (minutes) {
   heatingTimeout = setTimeout(function() {
     console.log('FINER: time out reached!');
     // Stop the heating
-    heating.off ();
+    turnOffHeating();
   }, minutes * 60 * 1000);
 
   // turn on the heating
   heating.on();
+  lcd.printHeatingStatus (heating.status());
 }
 
 function turnOffHeating () {
@@ -94,6 +95,7 @@ function turnOffHeating () {
 
   // turn off the heating
   heating.off();
+  lcd.printHeatingStatus (heating.status());
 }
 
 // temp measurement
