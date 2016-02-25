@@ -15,7 +15,7 @@ var lcd = new LCD();
 
 var DEFAULT_TIMER = 1; // TODO REVIEW!!!!
 
-var BASE_LINE_TEMP = 20;
+var BASE_LINE_TEMP = 22 ;
 var BASE_LINE_TOLERANCE = 0.1;
 
 var monotonics = {};
@@ -30,10 +30,14 @@ monotonic_avg.on('emit', function(values) {
       lcd.printAvgTemperature(values['mean']);
       if (values['mean'] < lo_temp ) {
         console.log("turn ON heating! " + values['mean'] + ' <= ' + lo_temp);
-        //TODO turnOnHeating();
+        //TODO
+        turnOnHeating();
       } else if (values['mean'] > hi_temp) {
         console.log("turn OFF heating! " + values['mean'] + ' > ' + hi_temp);
-        //TODO turnOffHeating();
+        //TODO
+        if (!heatingTimeout) {
+            turnOffHeating();
+        }
       } else {
         console.log('Do nothing! ' + lo_temp + ' <= ' + values['mean'] + ' <= ' + hi_temp);
       }
@@ -76,6 +80,7 @@ function turnOnHeating (minutes) {
   // Set a timout for X minutes, calcel previous timer
   if (heatingTimeout) {
     clearTimeout(heatingTimeout);
+    heatingTimeout = null;
   }
 
   heatingTimeout = setTimeout(function() {
